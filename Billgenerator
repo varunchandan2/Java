@@ -1,0 +1,102 @@
+package assignmentpackage;
+
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+import java.util.Arrays;
+import java.util.Random;
+
+
+/**
+*Java program to develop Bill Generator Program
+* @author Varun Chandan
+* @version 1.0
+*/
+
+public class Project2 {
+	/**
+	 * Creates a bill that reads a numeric input and gives the required output.
+	 * @param args A string array containing command-line parameters.
+	 */
+
+public static void main(String[] args) {
+
+
+	// TODO code application logic here
+    
+    
+    Scanner info = new Scanner(System.in);
+    Random  rand = new Random();
+    DecimalFormat df1 = new DecimalFormat("00.00");
+    DecimalFormat df2 = new DecimalFormat("0000.00");
+    DecimalFormat df3 = new DecimalFormat(".00");
+    
+    
+    int n = rand.nextInt(99) + 10;
+   // Input
+   // Input your first name
+    System.out.print("Enter your first name: ");
+    String fname = info.next();
+    // Input your last name
+    System.out.print("Enter your last name: ");
+    String lname = info.next();
+    // Input the length in feet
+    System.out.print("Enter the length of room (feet): ");
+    int length = info.nextInt();
+    // Input the width in feet
+    System.out.print("Enter the width of room (feet): ");
+    int width = info.nextInt();
+    // Input the cost
+    System.out.print("Enter cost per square foot: ");
+    float cost = info.nextFloat();
+    
+    // Processing
+    String formatted_lname = lname.substring(0,1).toUpperCase()+lname.substring((1));
+    String formatted_fname = fname.substring(0,1).toUpperCase()+fname.substring((1));
+   
+    // Calculate the area of the room
+    int area = length*width;
+    String mLength = String.format("%03d", length);
+    String mWidth = String.format("%03d", width);
+    String mArea = String.format("%03d", area);
+   
+    //Calculate the total charges and tax
+    double tax = 0.085;
+    double charges = cost*area;
+    double totaltax = charges*tax;
+    double total = totaltax+charges;
+    String[] tlen = Double.toString(totaltax).split("\\.");
+    
+    String ftax = tlen[0];
+    int tax_int = ftax.length()+1;
+    char[] zeros = new char[tax_int];
+    Arrays.fill(zeros, '0');
+    DecimalFormat df4 = new DecimalFormat(String.valueOf(zeros)+".00");
+    
+    
+    // Output of the data inserted
+    System.out.println("");
+    System.out.println("CUSTOMER");
+    System.out.println("Last Name       "+ formatted_lname);
+    System.out.println("First Name      "+ formatted_fname);
+    String ID = formatted_fname.substring(0,1)+formatted_lname.substring(0,5)+n;
+    System.out.println("ID              "+ ID);
+    System.out.println("");
+    System.out.println("MEASUREMENT");
+    System.out.println("Length      "+ mLength+" feet");
+    System.out.println("Width       "+ mWidth+" feet");
+    System.out.println("Area        "+ mArea+" square feet");
+    
+    // Total output displayed
+    System.out.println("");
+    System.out.println("CHARGES");
+    System.out.println("Description.            Cost/Sq.Ft.         Charges.");
+    System.out.println("------------            -----------         --------");
+    System.out.println("Carpet                     "+df1.format(cost)+"            $"+ df2.format(charges));
+    System.out.println("Tax                         "+df3.format(tax*100)+"%            "+ df4.format(totaltax));
+    System.out.println("                                            ----------");
+    System.out.println("Total                                       $"+ df2.format(total));
+    
+}
+
+}
