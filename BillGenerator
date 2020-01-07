@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class Project2 {
 	/**
-	 * Creates a bill that reads a numeric input and gives the required output.
+	 * Created a bill that reads a numeric input and gives the required output.
 	 * @param args A string array containing command-line parameters.
 	 */
 
